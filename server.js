@@ -9,13 +9,15 @@ import contactRoutes from "./routes/contactRoutes.js";
 const app = express();
 
 // Middleware
-// Middleware
-// Middleware
 app.use(cors({
-  origin: ["https://www.sanviosystems.com"], // apna frontend domain
+  origin: [
+    "https://www.sanviosystems.com",  // with www
+    "https://sanviosystems.com"       // without www
+  ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
+
 app.use(express.json());
 
 
