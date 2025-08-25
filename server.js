@@ -2,9 +2,13 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import path from "path";
+import dotenv from "dotenv";   
+dotenv.config();  
+
 import productRoutes from "./routes/productRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
+
 
 const app = express();
 
@@ -36,7 +40,7 @@ app.get("/api/health", (req, res) => {
 });
 
 // Connect to MongoDB
-mongoose.connect("mongodb+srv://sanvioadvt:sanvio110@cluster0.jgoifnx.mongodb.net/?retryWrites=true&w=majority")
+mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB Connected"))
   .catch(err => console.error("MongoDB Error:", err));
 
