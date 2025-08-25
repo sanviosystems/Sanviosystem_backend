@@ -1,13 +1,15 @@
 import multer from "multer";
-import path from "path";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
+import cloudinary from "../config/cloudinary.js";
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join(path.resolve(), "uploads")); // backend/uploads
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname));
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "sanviosystems_products", // Cloudinary folder
+    allowed_formats: ["jpg", "png", "jpeg", "webp"],
   },
 });
 
-export const upload = multer({ storage });
+const upload = multer({ storage });
+
+export default upload;
